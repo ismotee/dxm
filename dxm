@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+const argv = require("yargs") //eslint-disable-line
+  .command("build [name]", "build a new or existing component", yargs => {
+    yargs.positional("name", {
+      describe: "name of the component (also the template file)"
+    });
+  })
+  .demandCommand(1).argv;
+
+require("./index.js")(argv); //eslint-disable-line;

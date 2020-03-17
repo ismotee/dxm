@@ -1,0 +1,6 @@
+{
+  "name": "Test",
+  "type": "class",
+  "render": "<div>test</div>",
+  "tests": null
+}
