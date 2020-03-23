@@ -1,12 +1,13 @@
 const fs = require("fs");
 const path = require("path");
 const Draft = require("./draft.js");
+const yaml = require("js-yaml");
 
 module.exports = function(argv) {
+  const fileName = argv.name;
+
   checkExecPath();
   createFolderIfNotExist("./src/components");
-
-  const fileName = argv.name;
   const draft = makeDraft(fileName);
   draft.writeToFile();
 };
@@ -33,12 +34,12 @@ function makeDraft(fileName) {
 function importDraftSettings(fn) {
   const file = makeFileNameExtensionAgnostic(fn);
   ensureDraftSettingsFileExists(file);
-  return require(file);
+  return yaml.safeLoad(fs.readFileSync(file, "utf8"));
 }
 
 function makeFileNameExtensionAgnostic(fn) {
-  const name = fn.replace(".json", "");
-  return path.join(process.cwd(), `${name}.json`);
+  const name = fn.replace(".yml", "");
+  return path.join(process.cwd(), `${name}.yml`);
 }
 
 function ensureDraftSettingsFileExists(fn) {

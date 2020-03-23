@@ -1,0 +1,16 @@
+name: Test
+type: function
+state:
+  value: 0
+render: >-
+
+  <div id="test-div">
+      {value}
+  </div>
+tests:
+  - given: null
+    when:
+      event: test-div.onClick
+      args:
+    then:
+      value: 2
